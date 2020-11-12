@@ -98,7 +98,7 @@ public class Player : MonoBehaviour
         }
         else
         {
-            return Vector3.zero;
+            return strafeSpeed * transform.right * _input.x;
         }
     }
 }
