@@ -6,6 +6,8 @@ using UnityEngine.PlayerLoop;
 public class Player : MonoBehaviour
 {
 
+    public static Player instance;
+
     float _pitch = 0;
 
 
@@ -13,6 +15,9 @@ public class Player : MonoBehaviour
 
     [SerializeField]
     float _sensitivity = 10;
+
+    [SerializeField]
+    float _ysensitivity = 1;
 
     [SerializeField]
     float forwardSpeed = 2f;
@@ -39,6 +44,10 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (instance != null) Destroy(gameObject);
+
+        instance = this;
+
         _rb = GetComponent<Rigidbody>();
 
         _controller = GetComponent<CharacterController>();
@@ -51,7 +60,7 @@ public class Player : MonoBehaviour
     {
         _input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
 
-        dt = Input.GetAxis("Mouse Y") * _sensitivity;
+        dt = Input.GetAxis("Mouse Y") * _ysensitivity * _sensitivity;
 
         mouseX = Input.GetAxis("Mouse X") * _sensitivity;
  

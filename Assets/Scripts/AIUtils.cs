@@ -11,28 +11,16 @@ public class AIUtils : MonoBehaviour
      * -Arthur Hertz
      */
 
-    public static Vector3 RandomNavSphere(Vector3 origin, float maxDistanceFromSource, float maxDistanceFromTarget, int layermask, int sampleDepth)
+    public static Vector3 RandomNavSphere(Vector3 origin, float maxDistanceFromSource)
     {
-        Vector3 result = origin;
 
-        Vector3 randomDirection;
+        Vector3 randomDirection = Random.onUnitSphere * maxDistanceFromSource;
 
         NavMeshHit navHit;
 
-        while (sampleDepth > 0) {
-            randomDirection = UnityEngine.Random.onUnitSphere * maxDistanceFromSource;
+        NavMesh.SamplePosition(randomDirection, out navHit, maxDistanceFromSource, 1);
 
-            randomDirection.y = 0;
-
-            randomDirection += result;
-
-            NavMesh.SamplePosition(randomDirection, out navHit, maxDistanceFromTarget, layermask);
-
-            result =  navHit.position;
-
-            sampleDepth--;
-        }
-        return result;
+        return navHit.position;
     }
 
 }

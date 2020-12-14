@@ -23,21 +23,6 @@ public class ShootOnClick : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0) && gunAnimator.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
-        {
-            gunAnimator.SetTrigger("fireWeapon");
-            StartCoroutine(FlickerCamera());
-        }
-    }
 
-
-    IEnumerator FlickerCamera () {
-        ghostCamera.gameObject.SetActive(true);
-
-        GetComponent<AudioSource>().PlayOneShot(playOnFire);
-
-        yield return new WaitForSeconds(flickerTime);
-
-        ghostCamera.gameObject.SetActive(false);
     }
 }

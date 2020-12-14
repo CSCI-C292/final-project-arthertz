@@ -13,7 +13,7 @@ public class WanderRandomly : MonoBehaviour
     float maxDistanceFromSource;
 
     [SerializeField]
-    float maxDistanceFromTarget;
+    float maxIterations;
 
 
     // Start is called before the first frame update
@@ -27,7 +27,7 @@ public class WanderRandomly : MonoBehaviour
     {
         if (agent.pathStatus == NavMeshPathStatus.PathComplete)
         {
-            agent.SetDestination(AIUtils.RandomNavSphere(transform.position, maxDistanceFromSource, maxDistanceFromTarget, -1, 5));
+            agent.SetDestination(AIUtils.RandomNavSphere(transform.position, maxDistanceFromSource));
         }
     }
 }
